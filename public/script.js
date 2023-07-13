@@ -61,15 +61,19 @@ fetchRandomButton.addEventListener('click', () => {
 
 fetchByAuthorButton.addEventListener('click', () => {
   const author = document.getElementById('author').value;
-  fetch(`/api/quotes?person=${author}`)
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      renderError(response);
-    }
-  })
-  .then(response => {
-    renderQuotes(response.quotes);
-  });
+  if(author) {
+    fetch(`/api/quotes?person=${author}`)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        renderError(response);
+      }
+    })
+    .then(response => {
+      renderQuotes(response.quotes);
+    });
+  } else {
+    renderQuotes([]);
+  }
 });

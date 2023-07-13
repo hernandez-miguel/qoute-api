@@ -6,13 +6,13 @@ const { getRandomElement, findPerson, filterByPerson } = require('../utils');
 const qoutesRouter = express.Router();
 
 qoutesRouter.get('/', (req, res, next) => {
-  if(findPerson(quotes, req.query.person)) {
+  if (!req.query.person) {
+    res.send({quotes: quotes});
+  } else if(findPerson(quotes, req.query.person)) {
     const quotesByPerson = filterByPerson(quotes, req.query.person);
     res.send({quotes: quotesByPerson})
-  } else if (!req.query.person) {
-    res.send({quotes: quotes});
   } else {
-    res.send({quotes: []})
+    res.send({quotes: []});
   }
 })
 
