@@ -12,7 +12,7 @@ const quotes = [
     person: 'Grace Hopper'
   },
   {
-    quote: 'The city’s central computer told you?  R2D2, you know better than to trust a strange computer!',
+    quote: 'The city`s central computer told you?  R2D2, you know better than to trust a strange computer!',
     person: 'C-3PO'
   },
   {
