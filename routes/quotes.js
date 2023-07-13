@@ -3,9 +3,9 @@ const express = require('express');
 const { quotes } = require('../data');
 const { getRandomElement, findPerson, filterByPerson } = require('../utils');
 
-const qoutesRouter = express.Router();
+const quotesRouter = express.Router();
 
-qoutesRouter.get('/', (req, res, next) => {
+quotesRouter.get('/', (req, res, next) => {
   if (!req.query.person) {
     res.send({quotes: quotes});
   } else if(findPerson(quotes, req.query.person)) {
@@ -16,9 +16,16 @@ qoutesRouter.get('/', (req, res, next) => {
   }
 })
 
-qoutesRouter.get('/random', (req, res, next) => {
+quotesRouter.get('/random', (req, res, next) => {
   const randomQuote = getRandomElement(quotes);
   res.send({quote: randomQuote});
 })
 
-module.exports = qoutesRouter;
+quotesRouter.post('/', (req, res, next) => {
+  if (req.query.quote && req.query.person) {
+    quotes.push(req.query);
+    res.send({quote: req.query});
+  }
+})
+
+module.exports = quotesRouter;
